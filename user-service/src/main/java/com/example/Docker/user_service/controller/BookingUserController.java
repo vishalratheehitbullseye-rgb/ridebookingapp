@@ -48,6 +48,25 @@ public class BookingUserController {
 //        return ResponseEntity.ok(response.getBody());
 //    }
 
+    @PostMapping("/book")
+    public ResponseEntity<?> createBooking(){
+        System.out.println("Call the Booking service from UserService");
 
+        // Use Eureka service discovery with the service name (booking-service)
+        String bookingServiceUrl = "http://booking-service/booking/book";  // booking-service is the name registered in Eureka
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+
+        // Create HTTP entity with headers (if necessary)
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+
+        // Call the Booking microservice's createBooking method using Eureka
+        ResponseEntity<String> response = restTemplate.exchange(
+                bookingServiceUrl, HttpMethod.POST, entity, String.class);
+
+        // Return the response from the Booking microservice
+        return ResponseEntity.ok(response.getBody());
+    }
 
 }
