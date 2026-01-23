@@ -7,8 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/booking")
+@RequestMapping("/")
 @RequiredArgsConstructor
 public class BookingController {
 
@@ -25,6 +27,11 @@ public class BookingController {
                 " to destination : " + booking.getDestination());
 
         return ResponseEntity.ok(bookingService.createBooking(booking));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<Booking>> getAllBookings(){
+        return ResponseEntity.ok(bookingService.getAllBookings());
     }
 
 }

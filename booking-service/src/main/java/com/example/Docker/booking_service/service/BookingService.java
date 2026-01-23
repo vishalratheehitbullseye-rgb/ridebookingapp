@@ -5,6 +5,8 @@ import com.example.Docker.booking_service.repo.BookingRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BookingService {
@@ -15,4 +17,7 @@ public class BookingService {
         return bookingRepo.save(booking);
     }
 
+    public List<Booking> getAllBookings() {
+        return bookingRepo.findAll();
+    }
 }
